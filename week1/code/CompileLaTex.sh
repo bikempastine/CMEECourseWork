@@ -1,11 +1,14 @@
 #!/bin/bash
 # CODE: script to compile pdf
 
-pdflatex $1.tex
-bibtex $1
-pdflatex $1.tex
-pdflatex $1.tex
-evince $1.pdf &
+filename=`echo "${1%.*}"`
+echo "$filename"
+
+pdflatex $filename.tex
+bibtex $filename
+pdflatex $filename.tex
+pdflatex $filename.tex
+evince $filename.pdf &
 
 ##Cleanup
 rm *.aux
