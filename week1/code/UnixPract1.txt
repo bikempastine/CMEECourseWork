@@ -1,0 +1,12 @@
+#!/bin/sh
+# Author: Bikem Pastine bp222@ic.ac.uk
+# Script: UnixPract1
+# Desc: First UNIX FASTA file practical
+# Arguments: none
+# Date: Oct 2022
+
+wc -l ../data/fasta/E.coli.fasta ; wc -l ../data/fasta/407228412.fasta ; wc -l ../data/fasta/407228326.fasta #1
+awk 'NR>1' ../data/fasta/E.coli.fasta #2
+awk 'NR>1' ../data/fasta/E.coli.fasta | tr -d '\n' | wc -m #3
+awk 'NR>1' ../data/fasta/E.coli.fasta | tr -d '\n' | grep -o ATGC |wc -l #4
+AT=$(awk 'NR>1' ../data/fasta/E.coli.fasta | tr -d '\n' | grep -o 'A\|T' |wc -l) && GC=$(awk 'NR>1' ../data/fasta/E.coli.fasta | tr -d '\n' | grep -o 'C\|G' |wc -l) && awk "BEGIN {x=$AT; y=$GC; z=x/y; print z}"#5
