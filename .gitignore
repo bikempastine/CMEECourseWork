@@ -1,2 +1,5 @@
 *~ 
 *.tmp
+
+*.csv
+!pushabledata.csv
