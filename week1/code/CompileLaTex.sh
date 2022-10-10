@@ -1,5 +1,8 @@
 #!/bin/bash
-# CODE: script to compile pdf
+# Author: Bikem bp222@ic.ac.uk
+# Script: compile LaTeX files
+# Arguments: 1 -> LaTeX file
+# Date: Oct 2022
 
 filename=`echo "${1%.*}"`
 echo "$filename"
@@ -15,3 +18,5 @@ rm *.aux
 rm *.log
 rm *.bbl
 rm *.blg
+
+#exit
