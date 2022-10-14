@@ -5,8 +5,21 @@
 # Arguments: none
 # Date: Oct 2022
 
-wc -l ../data/fasta/E.coli.fasta ; wc -l ../data/fasta/407228412.fasta ; wc -l ../data/fasta/407228326.fasta #1
-awk 'NR>1' ../data/fasta/E.coli.fasta #2
-awk 'NR>1' ../data/fasta/E.coli.fasta | tr -d '\n' | wc -m #3
-awk 'NR>1' ../data/fasta/E.coli.fasta | tr -d '\n' | grep -o ATGC |wc -l #4
-AT=$(awk 'NR>1' ../data/fasta/E.coli.fasta | tr -d '\n' | grep -o 'A\|T' |wc -l) && GC=$(awk 'NR>1' ../data/fasta/E.coli.fasta | tr -d '\n' | grep -o 'C\|G' |wc -l) && awk "BEGIN {x=$AT; y=$GC; z=x/y; print z}"#5
+#The answers to the FASTA practical
+
+#1: Count how many lines there are in each file
+wc -l ../data/fasta/E.coli.fasta ; wc -l ../data/fasta/407228412.fasta ; wc -l ../data/fasta/407228326.fasta
+
+#2: Print everything starting from the second line for the E. coli genome
+awk 'NR>1' ../data/fasta/E.coli.fasta
+
+#3 Count the sequence length of this genome
+awk 'NR>1' ../data/fasta/E.coli.fasta | tr -d '\n' | wc -m
+
+#4 Count the matches of a particular sequence, “ATGC” in the genome of E. coli 
+awk 'NR>1' ../data/fasta/E.coli.fasta | tr -d '\n' | grep -o ATGC |wc -l 
+
+#5 Compute the AT/GC ratio. 
+AT=$(awk 'NR>1' ../data/fasta/E.coli.fasta | tr -d '\n' | grep -o 'A\|T' |wc -l) && GC=$(awk 'NR>1' ../data/fasta/E.coli.fasta | tr -d '\n' | grep -o 'C\|G' |wc -l) && awk "BEGIN {x=$AT; y=$GC; z=x/y; print z}"
+###set internal/temporary variables for the count of AT and GC and pipe with &&, use these to calculate the ratio between AT and GC using awk to perform arithmatic
+

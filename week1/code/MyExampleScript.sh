@@ -6,8 +6,9 @@
 # DATE: Oct 2022
 
 MSG1="Hello"
-MSG2=$USER
+MSG2=$USERbash 
 echo "$MSG1 $MSG2"
+# another way to print the above message
 echo "Hello $USER"
 echo
 

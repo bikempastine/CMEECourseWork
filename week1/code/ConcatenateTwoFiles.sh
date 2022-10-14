@@ -4,17 +4,27 @@
 # Arguments: 3 -> 2 files to be merged and the new path for the output
 # Date: Oct 2022
 
-if [ $# -ne 3 ] #check if the number of arguments supplied is 3
+if [ $# -eq 2 ]  #check if the number of arguments supplied is 2
 then 
-#return this message if incorrect number of files are supplied
-    echo "Incorrect number of files supplied. Please supply the paths for the two files to be merged and the desired name and path of the output file." 
+    if [[ "${1: -3}" == "${2: -3}" ]] #check if the file types are the same by comparing the final 3 characters of the file
+    then
+        echo "First file is $1, Second file is $2"
+        echo "Please enter the filepath and name of the new merged file."
+        read outputname
+        echo 
+        echo "Merged file will be saved as $outputname"
+        echo
+        cat $1 > $outputname #copy contents of file 1 to new file
+        cat $2 >> $outputname  #add file 2 to the end of the newly created file 3, after file 1
+        echo "Merged File:"
+        cat $outputname
+        echo
+        echo "Merged!"
+    else
+        echo "Error: file types are different, please enter files of the same type."
+        fi
 else
-    echo "First file is $1, Second file is $2"
-    echo "Merged file is saved as $3"
-    cat $1 > $3 #copy contents of file 1 to new file
-    cat $2 >> $3 #add file 2 to the end of the newly created file 3, after file 1
-    echo "Merged File:"
-    cat $3 
+    echo "Error: incorrect number of files supplied, please supply only two files to merge." 
     fi
 
 

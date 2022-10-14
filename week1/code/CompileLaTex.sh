@@ -4,14 +4,20 @@
 # Arguments: 1 -> LaTeX file
 # Date: Oct 2022
 
+#allow imput to be full filename including extension
 filename=`echo "${1%.*}"`
 echo "$filename"
 
+#Compile file
 pdflatex $filename.tex
 bibtex $filename
 pdflatex $filename.tex
 pdflatex $filename.tex
-evince $filename.pdf &
+
+#move output to the results section and open file
+mv $filename.pdf ../results/
+evince ../results/$filename.pdf &
+
 
 ##Cleanup
 rm *.aux
