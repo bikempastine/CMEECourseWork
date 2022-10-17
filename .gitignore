@@ -1,7 +1,5 @@
 *~
 *.tmp
-content/results/*
-content/[Ss]andbox/*
 
 # Python
 *.py[co]
