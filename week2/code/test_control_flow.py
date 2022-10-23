@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 
 ## docstrings ##
-"""This program demonstrats the use of control statements."""
+"""This program demonstrats the use of control flow statements and doctests."""
 
-__appname__ = '[control_flow.py]'
+__appname__ = '[test_control_flow.py]'
 __author__ = 'Bikem Pastine (bp222@ic.ac.uk)'
 __version__ = '0.0.1'
 __license__ = "No license needed"
@@ -11,6 +11,7 @@ __license__ = "No license needed"
 ## imports ##
 import doctest
 import sys 
+
 #module is made to interface with the operating system
 
 ## constants ##

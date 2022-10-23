@@ -5,8 +5,6 @@
 # Date: Oct 2022
 
 #For loops
-from re import S
-
 
 for i in range(5):
     print(i)
