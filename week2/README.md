@@ -13,7 +13,7 @@ Run the code within the 'code' folder. The code may prompt for inputs. Appropria
 | basic_csv.py |  Writes a file with the species and body mass data from the file testcsv.csv | [here](https://github.com/bikempastine/CMEECourseWork/blob/main/week2/code/) |
 | basic_io1.py | Reads test.txt and returns the content, as well as removing the backspaces| [here](https://github.com/bikempastine/CMEECourseWork/blob/main/week2/code/) |
 | basic_io2.py |  Writes a .txt file with the numbers 0 to 99, each on a new line | [here](https://github.com/bikempastine/CMEECourseWork/blob/main/week2/code/) |
-| basic_io3.py |  ???? | [here](https://github.com/bikempastine/CMEECourseWork/blob/main/week2/code/) |
+| basic_io3.py | Demonstrates the use of pickle to open files | [here](https://github.com/bikempastine/CMEECourseWork/blob/main/week2/code/) |
 | boilerplate.py | Boilerplate python script | [here](https://github.com/bikempastine/CMEECourseWork/blob/main/week2/code/) |
 | cfexcersises1.py | Module with mathematical opperation functions using conditionals | [here](https://github.com/bikempastine/CMEECourseWork/blob/main/week2/code/) |
 | cfexcersises2.py |  Prints 'hello' a number of times to ilustrate elseif statements | [here](https://github.com/bikempastine/CMEECourseWork/blob/main/week2/code/) |
