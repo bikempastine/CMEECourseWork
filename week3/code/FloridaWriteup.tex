@@ -1,0 +1,53 @@
+\documentclass[11pt]{article}
+\usepackage{graphicx}
+\usepackage[margin=1cm]{geometry}
+\graphicspath{ {../results/} }
+
+
+\title{Is Florida getting warmer?}
+\date{\vspace{-2cm}}
+
+\begin{document}
+  \maketitle
+  
+Global climate change altered the average climate in many places during the 20th century. 
+A statistical investigation reveals that the average annual temperature increased in Key West, 
+Florida during the 20th century. 
+This increase is highly unlikely (p-value $<$ 0.05) to have occured if 
+there were no correlation between temperatures and time.
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[scale=0.4]{temp.png}
+  %\caption{Temperatures in Key West, Florida in the 20th century}
+  \label{fig:temps}
+\end{figure}
+
+There is a positive correlation between time and temperature as can be seen in Figure 1.
+This means that the average annual temperature increased in the 20th century. 
+To attribute this trend to a true warming rather than chance, statistical significance of the 
+correlation coefficient is tested. If the correlation is insignificant,
+the correlation can be attributed to chance coincedance rather than to climate change.
+
+To calculate the p-value, a permutation analyis is performed.
+A standard t-test is not appropriate because time series data is not independent.
+The temperature data is ordered randomly using the 'sample' function in R 100,000 times. 
+The correlation coeffiecent of each randomized time series is computed to 
+produce a probability distriution for the correlation coefficients. 
+The observed correlation coefficient is compared to the probability density function.
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[scale = 0.4]{density.png}
+  %\caption{Distribution of generated correlation coefficients}
+  \label{fig:distribution}
+\end{figure}
+
+A corrrelation coefficient as high as 0.53 did not occur at all in all 100,000 random permutations of the 
+time series as can be seen in Figure 2. This means that such a high 
+correlation between time and temperature is highly unlikely (p-value $<$$<$ 0.05) to have occured by chance. 
+It can be concluded that Key West, Florida got warmer in the 20th century.
+
+
+
+\end{document}

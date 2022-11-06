@@ -30,6 +30,7 @@ MyData[MyData == ""] = 0
 
 TempData <- as.data.frame(MyData[-1,],stringsAsFactors = F) #stringsAsFactors = F is important!
 colnames(TempData) <- MyData[1,] # assign column names from original data
+head(TempData)
 
 ############# Convert from wide to long format  ###############
 require(reshape2) # load the reshape2 package
@@ -51,9 +52,11 @@ dim(MyWrangledData)
 
 ############# Exploring the data (extend the script below)  ###############
 
+require(tidyverse)
 #converting dataframe into a tibble
-MyWrangledData <- dplyr::as_tibble(MyWrangledData)
+MyWrangledData <- as_tibble(MyWrangledData)
 MyWrangledData
+class(MyWrangledData)
 
 glimpse(MyWrangledData)
 
@@ -65,3 +68,30 @@ slice(MyWrangledData, 10:15)
 
 MyWrangledData %>% group_by(Species) %>% 
         summarise(avg =mean(Count))
+
+#same as
+aggregate(MyWrangledData$Count, list(MyWrangledData$Species), FUN=mean) 
+
+# Visualisation 
+library(ggplot2)
+
+# histogram of species abundance, grouped by cultivation
+abundance_by_cultivation <- MyWrangledData %>% 
+        group_by(Cultivation)%>% 
+        ggplot( aes(x = log(Count))) +
+        geom_histogram(fill = "lightblue", colour = "black") +
+        theme_bw()+
+        facet_grid(Cultivation ~ .)+
+        labs(x = "Species Abundance",
+        y = "Count of plots" ,
+        title = "Species abundance by cultivation month")
+
+#Bar plot of the number of tree species and number of trees observed of each species
+spec<- MyWrangledData %>% group_by( Species)%>%  summarize(total = sum(Count))
+ggplot(data = spec ,aes(y = total, x= reorder(Species, total))) +
+        geom_bar(stat="identity", fill = 'steelblue')+
+        theme_bw()+ coord_flip() + labs(x = 'total observed',
+        y = 'Tree species', title = 'Number of tree species')
+
+
+

@@ -15,7 +15,7 @@ pdflatex $filename.tex
 pdflatex $filename.tex
 
 #move output to the results section and open file
-mv $filename.pdf ../results/
+mv $filename.pdf ../results/$filename.pdf
 evince ../results/$filename.pdf &
 
 
