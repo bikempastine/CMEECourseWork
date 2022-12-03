@@ -1,0 +1,2 @@
+#ignore .RData files
+*.RData
