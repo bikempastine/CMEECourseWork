@@ -1,32 +1,207 @@
-\documentclass[12pt]{article}
+\documentclass[11pt]{article}
+%set spacing to 1/2
+\usepackage{setspace} 
+\onehalfspacing
+
+
+%set continuous line numbering
+\usepackage{lineno}
+\linenumbers
+
+%Harvard Referencing
+\usepackage{natbib}
+
+%put in figures
+\usepackage{graphicx}
+
+%stop figures floating across boundaries
+\usepackage[section]{placeins}
+
+%paragraph formatting
+\usepackage[parfill]{parskip}
+
 
 \title{A Simple Document}
 
 \author{Bikem Pastine}
 
-\date{week 1 Oct 2022}
+
+\date{4 December 2022}
 
 \begin{document}
+  \centering
   \maketitle
   
+  \textbf{Affiliation:} CMEE MSc, Imperial College\\
+
+  \textbf{Word Count:} \input{wordcount.txt}
+  
+   %seperate out the title page
+   \newpage
+
   \begin{abstract}
     This paper analyzes a seminal equation in population biology.
   \end{abstract}
-  
+
+  %seperate out the abstract
+  \newpage
+
   \section{Introduction}
-    Blah Blah
+  \raggedright
   
-  \section{Materials \& Methods}
+  \section{Data}
+  The dataset contains microbial population data over time collected in multiple lab experiments across the world.  The data are collated from ten different studies and cover forty-four different microbial species. The growth curves are produced in fifteen diverse mediums and across temperatures ranging 0$^{\circ}$ C to 37 $^{\circ}$ C. This diversity in experimental design and bacterial species is ideal for studying model fits. General patterns in model suitability can be inferred rather than the specific explanatory power of models to approximate growth curves for a single species as is common in other studies eg. \cite{Zwietering1990}.
+
+  The population data is also diverse in its units. The studies measure population using four different methods. The different methods are outlined below with special attention given to how the different methods may influence the shape of the population growth curves.
+
+  \textbf{Optical density:} this method uses a spectrophotometer to measure light scattering through a sample with the bacterial population. The more bacteria there are, the higher the turbidity of the population and the more light is scattered \cite{Madigan_Michael2021-07-01}. This can bias the population measures negatively: population numbers can look lower than the reality as some bacteria can clump together or form biofilm, reducing light scattering. There may be biological population thresholds that dictate favorable conditions for clumping, which could bias the overall shape of the growth curve. 
+
+  \textbf{N:} microscopic cell counts are taken on a Petri dish. This method has low precision, but count errors are often random, meaning that the low precision of this method may not bias the shape of the growth curve \cite{Madigan_Michael2021-07-01}. However, in some cases small cells may be difficult to see, and therefore lag phase population numbers may especially be biased as cells are growing in size rather than number at this stage. Dead cells cannot be distinguished from live cells in this method, This is a significant source of bias and can obscure the death phase from being identified. 
+
+  \textbf{Dry Weights:} a sample of the bacterial population is concentrated by centrifuged, washed, and dried and then weighed in this method. The weight of this sample is indirectly related to total population numbers. This method also cannot distinguish between live and dead cells as above. 
+
+  \textbf{CFU:} colony forming units are counted using automated systems or under a microscope. Only viable cells are counted \citep{Galarz2016}, meaning that it is possible for the death phase to be captured in the population growth curves produced using this method. The estimates of colony forming units are not precise and are highly suceptible to human error. 
+
+  \section{Methods}
+  \subsection{Computing Tools}
+  R is the primary language used in this project. Data cleaning, model fitting, data analysis, and visualisation are conducted in R. I chose to use R over python for its advantages in data manipulation and visualisation. The package ggplot2 is utilised to produce highly customisable and informative plots that may be difficult to produce with python. Furthermore, the package dplyr in R allows for intuitive and fast data manipulation. A comprehensive list of packages used can be found in the Readme file for this project. 
   
-  A foundational equation of population biology is:
-  
+  The major drawback of R is speed when using loops. Loops feature heavily the model fitting code, making the project more computationally expensive than necessary. However, model fitting takes about one minute and forty-six seconds using loops in R. This speed satisfied my efficiency requirements for this project. If efficiency were a higher priority, the model fitting could be rewritten in python. 
+
+  This project is written in LaTeX and I wrote a function to embed the word count into this document in bash. The advantage of LaTeX over Word is reproducibility and aesthetics. 
+
+  The workflow script is written in bash. I chose bash over Python for simplicity.  
+
+  \subsection{Data Cleaning}
+  I cleaned the bacteria growth data by removing erroneous entries. Data where experiment time and bacterial population were recorded as negative were excluded because negative time and population are physically and biologically impossible. I lost 2.1\% of the observations to this cleaning. 
+
+  I grouped the data by unique species, growth medium, temperature, and the study the data was collected in. These groups each represent a single experimental campaign, where time alone varies. Therefore, plotting the  bacterial population over time for a single group produces a unique growth curve. I assigned ID values for each group and produced a key. Moving forward the ID column is preserved in all analysis and the details of the experimental conditions can be retrieved by merging the analysis with the key by the unique ID value. 
+
+  I disregarded those curves which had fewer than six observations. This semi-arbitrary threshold was chosen in part to allow for the sufficient degrees of freedom for the calculation of the Gompertz equation, which requires at least five data points, and in part to allow for meaningful model fits. Fitting the Gompertz model to growth curves with a sample size of five data points required many iterations to find appropriate starting values and the small sample size resulted in difficult to interpret linear model outputs. Forty-four growth curves had less than six data points, leaving 241 curves for fitting out of the original 285.
+
+  \subsection{Data Transformation}
+  I transformed the bacterial population data into the log scale before fitting the models.  
+
+  The benefits of log transforming bacterial growth data are numerous. Firstly, log transformed data is commonly preferred over linear data in the literature. Bacterial populations are known to grow exponentially and so log transformation allows for more straightforward analysis and visualisation \citep{Madigan_Michael2021-07-01}. 
+
+  Log transformation also gives intuitive meaning to simple linear, quadratic, and cubic models. The intuition for these models is described below in the model selection section. Without the physiological basis afforded when performing these simplistic models on log transformed data, the models can be considered statistically convenient relationships at best and are not appropriate for model comparison \citep{Baranyi1995}. 
+
+  The Gompertz model accepts log transformed population data \citep{Peleg2011}. It is advantageous to use this model as it was designed in order to preserve the biological relationships that it approximates. 
+
+  The final advantage of log transforming the population data is the increased rate of residual normality. Residual normality is an assumption of AIC analysis \citep{Johnson2004} and so it is desirable that the residuals produced by the models are normal. I preformed the Shapiro-Wilk test for normality of the residuals for each of the linear models for log transformed data and for data in the linear scale. The number of growth curves where the model produced residuals that significantly (\,p $\le$ 0.05)\, differed from a normal distribution are provided in table \ref{tbl1}. Log transforming the data improved residual normality for the cubic and quadratic models and worsened it for the linear models.  As the intuitive meaning for the linear model hinges on log transformation, I fit the models to the log transformed data despite the consequences for residual normality. The Gompertz model produced normal residuals 83 \% of the time when fit to log transformed data, further satisfying this authors preference for residual normality. 
+
+   \begin{table}[!ht]
+    \centering
+    \begin{tabular}{lcc}
+    \hline
+        \textbf{model} & \textbf{Linear Scale} & \textbf{Log Transformed} \\ \hline
+        linear & 45 & 56 \\ 
+        quadratic & 54 & 40 \\ 
+        cubic & 45 & 43 \\ \hline
+    \end{tabular}
+    \caption{Counts of population curves with non-normal residuals with and without transformation}
+    \label{tbl1}
+    \end{table}
+
+  \subsection{Candidate Models}
+  I selected four candidate models with increasing levels of complexity and biological meaning.
+
+  I fit the three polynomial models using ordinary least squares regression and I fit the non-linear Gompertz model using non-linear least squares regression with a Gauss-Newton minimization algorithm.
+  \subsubsection{Gompertz Model}
+  The Gompertz model is a non-linear phenomenological model. This means that the equation is consistent with biological theory but not directly derived from first principals. The Gompertz model is the most widely used model of its kind \citep{Peleg2011}. It has been found to outperform other popular models such as the logistic model, Richards, Schnute, Standard, and Baranyi models \citep{Peleg2011,Zwietering1990}.
+
+  The Gompertz model has assumptions that must be considered. The Gompertz model does not account for nutrient concentration \citep{Allen2018}. Data from lab based experiments are unlikely to contradict this assumption as there is often excess substrate to facilitate the population reaching its carrying capacity \citep{Zwietering1990}. The Gompertz model is also inapplicable to small populations \citep{Allen2018} and does not account for the death phase. 
+
+  The Gompertz model takes log transformed observational bacterial population data an outputs the  estimated population I in the logarithmic scale.
+
+  The Gompertz model is expressed as:
+
+
   \begin{equation}
-    \frac{dN}{dt} = r N (1 - \frac{N}{K})
+    log(N_{t}) = N_{0} + (N_{max} - N_{0})* e^{-e^{r_{max}exp(1)\frac{t_{lag}-t}{(N_{max}- N_{0})log(10)}+1}}
   \end{equation}
   
-  It was first proposed by Verhulst in 1838 \cite{verhulst1838notice}.
+  where $N_{t}$ is population size at a given time, $N_{0}$  is population at time zero, $N_{max}$  is carrying capacity, $r_{max}$ is the maximum growth rate, and $t_{lag}$  is the inflection point location at the end of the lag phase, where the growth curve become exponential. 
+
+  In order to find the starting values for the model, I initially set $N_{0}$ to the log transformed population at time zero. I set carrying capacity, $N_{max}$, to the highest population value in the growth curve. I set $r_{max}$ to the highest slope between two consecutive points. $t_{lag}$ was found by taking the highest change in slope between points, to approximate the time when the lag phase ends and the exponential phase begins. I sampled 150 times from a normal distribution with d these estimations as the mean and chose the starting values which produced the model with the lowest $AIC_{c}$.
   
-  \bibliographystyle{plain}
+  \subsubsection{Polynomial Models}
+  The linear model performed on log scale growth data captures the logistic population growth of bacterial populations. It is a simple model but captures a key aspect of population growth theory: the exponential growth phase. This is purely an empirical model. I included this model in the ensemble because it is the simplest theoretically grounded model possible. More complex phenomenological models can be compared against the linear model as worthwhile models  must fit bacteria growth curves especially well in the exponential growth phase \citep{Allen2018}. 
+
+  The quadratic model is fit to log transformed population data with the potential for the growth phase and either the lag phase or the stationary phase to be approximated. I compare the Gompertz model to the linear and quadratic models to evaluate if this more complex model outperforms simple statistical models when faced with noisy experimental data.
+
+  Finally, the cubic model allows for all the classic stages of the bacterial growth curve to be approximated. This offers an advantage over the Gompertz model among other such model, which do not approximate the death stage. This shortcoming of traditional microbiology is due to a focus on cells in culture, which are not often allowed to grow until the death phase is initiate However, for a keener understanding o the microbial population cycle, mechanistic models may be pushed to account for the death stage as well. The cubic model is included in this study to investigate if the potential for modelling the death stage is advantageous.
+
+  Higher order polynomial functions are expected to fit data better, but I chose not to ex cede the order of a cubic function because beyond this level it becomes difficult to assign any intuitive meaning to the coefficients \citep{Allen2018}. 
+
+  
+  
+  \subsection{Analysis}
+  Model selection is a process whereby competing models are compared to identify which model fits data the best. This is done by ranking and weighting the level of comparative support of the data for each of the models \citep{Johnson2004}. 
+
+  I chose the Akaike Information Criterion (\,AIC)\, to infer the predictive accuracy of each model. I chose this method over a series of null hypothesis tests because it  allows multiple models to be compared at the same time, taking into account  the fit as well as the parsimony of the model. AIC is preferred over the Baysian Information Criterion (BIC) in ecological publications. 84\% of publication that perform model selection use AIC as the measure of model fit. In keeping with this disciplinary norm, I also preferred AIC over BIC as my measure.
+
+  The fit of the models for each growth cure were evaluated using AICc. AICc is advantageous over AIC as corrects for small sample sizes \citep{Johnson2004}: about 20\% of the growth curves in the cleaned dataset have seven and fewer data points. Furthermore, as sample size increases, $AIC_{c}$  approaches AIC  \citep{Symonds2010} and so it is an appropriate choice even for growth curves where there were more samples recorded.
+
+  $AIC_{c}$is calculated as:
+  \begin{equation} %Akaike C
+    AIC_{c} = n +2+nlog(\frac{2\pi }{n})+nlog(RSS)+2p_{n}+\frac{2p_{n}(p_{n}+1)}{n-p_{n}-1}
+  \end{equation}
+ 
+  n is the sample size, $p_{n}$ is the number of parameters in the model, and RSS is the residual sum of squares.
+
+  To find the model that fits the best for every growth curve, the models are ranked and the model with the lowest $AIC_{c}$ value is declared to have the highest predictive accuracy. The probability that this model is in fact the best approximating model in the ensemble is evaluated using Akaike weights.
+
+  Akaike weights are calculated by the following equation:
+
+  \begin{equation} %Akaike weights
+    W_{i} = \frac{exp(\frac{-1}{2(AIC_{i}- AIC_{min})})}{\sum exp(\frac{-1}{2(AIC_{i}- AIC_{min})})}
+  \end{equation}
+
+  $AIC_{i}$ is the $AIC_{c}$ value for each model, $AIC_{min}$ is the $AIC_{c}$ value of the winning model.
+
+  I set arbitrary probability thresholds of 95\% and 99\% to consider that the top ranking model was in fact the best approximating model in the ensemble. 
+
+ The number of times each model was found to be the best fitting model for a growth curve was tallied, and these results are analyzed further in the analysis and discussion sections.
+
+ 
+  \section{Results}
+
+  The models were fitted to 236 datasets successfully. For five growth curves, the Gompertz model could not be fit and these data were excluded from further analysis. In order to fit the excluded five datasets, further iterations of the model could be run to find more appropriate starting values. Upon a cost-benefit analysis, I decided that increasing the number of iterations to a sufficient level would be too costly for a potential 2\% increase in the number of  datasets that could be used in analysis. The five growth curves that were discarded are characterised by their untraditional shape: some had a concave trend or an apparent death phase without the lag or growth phases. All the datasets that could not be fit by Gompertz came from \citep{Bae2014}. Upon visual examination, it appears possible that the Gompertz model is a poor candidate to capture the growth trends in these anomalous datasets, regardless of the quality of the starting values supplied. 
+
+  \begin{figure}[!ht]
+    \centering
+    \includegraphics[width=7cm]{../results/model_compare_single_dougnut_99.png}
+    \caption{The proportion of growth curves best approximated by each model}
+    \label{doughnut}
+   \end{figure}
+
+  Figure ~\ref{doughnut} illustrates the proportion of growth curves that were best approximated by each model. The darker colours represent models where the Akaike weight is $>$0.99 and the lighter colour represents the model fits where the fit with the lowest $AIC_{c}$ had an Akaike weight $<$0.99. 
+  The majority of times when the liner and quadratic model were the best fit for the growth curve, they did not dominate the total Akaike weight. This suggests that other models may be appropriate as well: we can have less confidence that the top preforming model is truly better. 
+
+  There were two growth curves where the linear model was better than the other models at a 95\% confidence level and no cases at a confidence level of 99\%. There were two cases where the quadratic equation was the best model, at a 95\% confidence level, one of which had an Akaike weight $>$0.99.
+  
+  The Gompertz model, on the other hand, outperformed the three other models with an Akakie weight of at least 0.99 for 45\% of growth curves an 50\% of for a weight of at least 0.95. This suggests that the Gompertz model is the best model for approximating bacterial population growth curves for the majority of the data. 
+  
+  In most cases the cubic model was a poorer fit for the growth curves in my dataset than the Gompertz model but was a better fit in 4\% of the growth curves tested (\,Akaike weight $>$0.95)\,. While a 4\% out-performance rate may appear low, it is necessary to investigate if this is a statistical artifact or if there is a biological pattern as to why these 10 curves were better modelled by the cubic model rather than the phenomenological Gompertz model. 
+
+  \begin{figure}[!ht]
+    \centering
+    \includegraphics[width=7cm]{../results/model_compare_violin.png}
+    \caption{Distribution of Akaike weights for the best model for 238 growth curves. Jittered points represent individual Akaike weights.}
+    \label{violin}
+   \end{figure}
+
+  Figure ~\ref{violin} shows the distributions of Akaike weights for each model. The vast outperformance of the Gompertz model is clear in this figure. Gompertz is the superior model over five times as often as the cubic model and its Akaike weight distribution skews toward high values while the cubic distribution does not. The linear and quadratic model perform similarly well and have semi-uniform distribution. The Akaike Weight distribution for the cubic model is also highly uniform but skews slightly towards higher weights that the other two polynomial models. 
+
+  The analysis of Akaike weights raises questions about the importance of the model enables on the results. Akaike weights depend strongly on the model selection process. If this analysis were to be preformed without the inclusion of the quadratic or linear models, the results would likely be different. The polynomial models are nested, so it is possible that many of the growth curves best approximated by the lower order polynomials would be better approximated by the cubic model than the Gompertz model. This investigation is left to future work.
+  
+
+  \section{Discussion}
+
+  \section{Conclusion}
+
+  \bibliographystyle{agsm}
   
   \bibliography{MyBiblio}
 

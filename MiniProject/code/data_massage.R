@@ -19,8 +19,7 @@ d <- subset(grouped_data, Time >= 0 & PopBio > 0 ) #remove values that are less 
 d$PopBio <- log(d$PopBio) 
 
 #make a key of all the groups
-key <- d %>% group_by(Species, Medium, Temp, Citation) %>% 
-    select(Species, Medium, Temp, Citation,PopBio_units, ID) %>% 
+key <- d %>% select(Species, Medium, Temp, Citation,PopBio_units, ID) %>% 
     group_by(Species, Medium, Temp, Citation) %>%
     unique()
 
