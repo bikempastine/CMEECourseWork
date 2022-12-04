@@ -1,7 +1,7 @@
 # packages
 library(dplyr)
 library(minpack.lm) 
-library(ggplot2)
+
 #load the base plotting function
 source("global_functions.R")
 

@@ -20,7 +20,7 @@ Rscript --verbose gompertz_model.R #runs gompertz model
 Rscript --verbose create_final_csv.R #produce the csv
 
 #creating the figures
-Rscript --verbose doughnut_two_sections.R #produce the doughnut plot 
+Rscript --verbose dougnut_two_sections.R #produce the doughnut plot 
 Rscript --verbose violin_plot.R #produce the violin plot
 
 #Compile the writeup
