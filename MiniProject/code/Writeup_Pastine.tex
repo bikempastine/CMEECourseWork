@@ -40,14 +40,19 @@
    \newpage
 
   \begin{abstract}
-    This paper analyzes a seminal equation in population biology.
+    There is a shift in ecological modelling towards mechanistic models. One such field is microbial population growth modelling where there is a variety of proposed models from statistical to mechanistic at a cellular level. I conduct a model selection on the linear, quadratic, cubic, and the Gompertz model using AIC to see if the phenomenological model is always better or if there are cases where the statistical outperforms it. The models are fitted to species and environmentally diverse microbial population growth data, making the findings from the model selection more robust than model fitting studies that analyse fits to growth curves from a single population. I find that the Gompertz model has the highest predictive accuracy of the model ensemble, half of the growth curves are best approximated by the Gompertz model at a 95\% confidence level. Despite the overarching strength of the Gompertz, the cubic model is a better fit in some cases where the population growth curve reaches the death phase. 
   \end{abstract}
 
   %seperate out the abstract
   \newpage
 
-  \section{Introduction}
   \raggedright
+  \section{Introduction}
+    In the wake of major improvements in computational power and data availability, there is a movement towards improving ecological models by building up from first principals. Mechanistic theory driven models are preferable to purely statistical models. Statistical models can be more precise and realistic but sacrifice in generality \citep{10.2307/27836590}. This can be particularly harmful when using models to predict ecological outcomes in a climate that is rapidly and radically shifting away from historical levels \citep{drijfhout2015catalogue}. Model building schema for this shift towards the mechanistic and phenomenological have been proposed e.g. \citep{Harrison2021} and there is work building these models at scales from soil microbiology to biome range predictions. One wonders how such large scale shifts in the approach to model building in ecology will impact model prediction capabilities. In the shift from statistical to mechanistic models will there be any loss in our ability to forecast changes? In which cases might these losses occur?
+
+    Microbial growth curves have been heavily studied and many phenomenological and mechanistic models have been proposed. At the ground level, there is the statistical log scale linear model that predicts the exponential growth phase, the most keenly studied phase of the microbial population cycle \cite{Peleg2011}. There are phenomenological models, which sit in-between the statistical and the mechanistic as they are not built from first principals, but are in agreement with them \citep{Allen2018}. And then there are the recent propositions for modelling microbial population growth by the processes governing individual cell growth and division \citep{Jafarpour2019}. Perhaps this field charts a path for the wider ecological modelling literature.
+
+    In this project, I investigate how much better the Gompertz model, a phenomenological model, fits to diverse population growth data than simple statistical polynomial models. I find that the Gompertz model fits data far better than polynomial models in almost all cases. However, I find that when data is sparse the polynomial models outperform Gompertz. I also find that a cubic model can approximate the death phase of the population growth curve while Gompertz cannot and this gives a fit advantage to the cubic model in cases where the death phase is reached.
   
   \section{Data}
   The dataset contains microbial population data over time collected in multiple lab experiments across the world.  The data are collated from ten different studies and cover forty-four different microbial species. The growth curves are produced in fifteen diverse mediums and across temperatures ranging 0$^{\circ}$ C to 37 $^{\circ}$ C. This diversity in experimental design and bacterial species is ideal for studying model fits. General patterns in model suitability can be inferred rather than the specific explanatory power of models to approximate growth curves for a single species as is common in other studies eg. \cite{Zwietering1990}.
@@ -199,7 +204,6 @@
 
   \section{Discussion}
 
-  \section{Conclusion}
 
   \bibliographystyle{agsm}
   
