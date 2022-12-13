@@ -13,7 +13,8 @@ To check the weeks assignement, clone the directory for that week and run the co
 | Week 2 |   Biological Computing in Python    |   [here](https://github.com/bikempastine/CMEECourseWork/tree/main/week2) |
 | Week 3 |   Biological Computing in R   |   [here](https://github.com/bikempastine/CMEECourseWork/tree/main/week3) |
 | Week 7 |   Biological Computing in Python 2    |   [here](https://github.com/bikempastine/CMEECourseWork/tree/main/week7) |
-
+| MiniProject |  Computing project comparing linear and nonlinear model preformance   |   [here](https://github.com/bikempastine/CMEECourseWork/tree/main/MiniProject) |
+| Feedback |   Feedback on the submitted work    |   [here](https://github.com/bikempastine/CMEECourseWork/tree/main/Feedback) |
 ### Contact
 Bikem Pastine: bp222@ic.ac.uk
 
