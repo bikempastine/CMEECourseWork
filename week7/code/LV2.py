@@ -21,6 +21,9 @@ def dCR_dt(pops, t=0, r=0, a=0, z=0, e=0, K=0):
 
 
 def main(argv, plot= True):
+    p.close('all')
+
+    """Run the main function"""
 
     #Assign parameter values
     # Default parameters to be replaced when provided in the command line
@@ -77,7 +80,6 @@ def main(argv, plot= True):
         f2 = p.figure()
         p.plot(pops[:,0], pops[:,1], 'r-')
         p.grid()
-        p.legend(loc='best')
         p.xlabel('Resource density')
         p.ylabel('Consumer density')
         p.title('Consumer-Resource population dynamics')
@@ -87,7 +89,6 @@ def main(argv, plot= True):
 
         # save your result
         f2.savefig('../results/LV2_dynamics.pdf')
-
 
 
 
