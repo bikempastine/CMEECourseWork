@@ -2,6 +2,8 @@
 ## FILE INPUT
 ###################
 
+"""Reads test.txt and returns the content, as well as removing the backspaces"""
+
 #open file to read
 f = open('../sandbox/test.txt', 'r')
 

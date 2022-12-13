@@ -1,3 +1,5 @@
+"""Populates a dictionary using a loop and list comprehensions"""
+
 taxa = [ ('Myotis lucifugus','Chiroptera'),
          ('Gerbillus henleyi','Rodentia',),
          ('Peromyscus crinitus', 'Rodentia'),

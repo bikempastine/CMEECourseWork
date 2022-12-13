@@ -4,6 +4,8 @@
 # Arguments: 0
 # Date: Oct 2022
 
+"""Understanding variable scope in functions"""
+
 i = 1
 x = 0
 for i in range(10):
@@ -16,6 +18,7 @@ print(x)
 i =1
 x =0
 def a_function(y):
+    """Add 1 to x for each itteration over y"""
     x = 0
     for i in range(y):
         x += 1
@@ -23,15 +26,6 @@ def a_function(y):
 a_function(10)
 print(i)
 print(x)
-
-#########################
-i = 1
-x = 0
-def a_function(y):
-    x = 0
-    for i in range(y):
-        x += 1
-    return x
 
 print (a_function(10))
 
@@ -47,6 +41,7 @@ print("Before calling a_function, outside the function, the value of _a_global i
 print("Before calling a_function, outside the function, the value of _b_global is", _b_global)
 
 def a_function():
+    """Add 5 to _a_global when it is larger than 4 to demonstrate global vs local variables"""
     _a_global = 4
 
     if _a_global >= 4:
@@ -69,6 +64,7 @@ print("After calling the function, outside the function, the value of _b_ global
 _a_global = 10
 
 def a_function():
+    """Demonstrates global versus local variables"""
     _a_local = 4
     print("Inside the function, the value _a_local is", _a_local)
     print("Inside the function, the value of _a_global is", _a_global) 
@@ -83,6 +79,7 @@ _a_global = 10
 print("Before calling a_function, outside the function, the value of _a_global is", _a_global)
 
 def a_function():
+    """Changing local and global varibales within functions"""
     global _a_global
     _a_global = 5
     _a_local = 4
@@ -95,9 +92,11 @@ a_function()
 print("After calling a_function, outside the function, the value of _a_global is", _a_global)
     
 def a_function():
+    """function where the variable is defined inside and within another internal function"""
     _a_global = 10
 
     def _a_function2():
+        """changes the variable _a_global"""
         global _a_global
         _a_global =2
     
@@ -116,8 +115,10 @@ print("The value of a_global in main workspace / namespace now is", _a_global)
 _a_global = 10
 
 def a_function():
+    """function calling another function"""
 
     def _a_function2():
+        """function changing the value of _a_global"""
         global _a_global
         _a_global = 20
     

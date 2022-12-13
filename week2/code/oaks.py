@@ -3,6 +3,7 @@
 # Script: oaks.py
 # Arguments: 0
 # Date: Oct 2022
+"""Finds oaks from a list of species using list comprehensions and loops"""
 
 taxa = ['Quercus robur',
          'Fraxinus excelsior',
@@ -13,6 +14,7 @@ taxa = ['Quercus robur',
 #finds just the oak trees from a list of species
 
 def is_an_oak(name):
+    """Find all names that starts with quercus"""
     return name.lower().startswith('quercus')
 
 ##Using for Loops

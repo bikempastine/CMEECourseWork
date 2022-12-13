@@ -1,3 +1,5 @@
+"""Writes a file with the species and body mass data from the file testcsv.csv"""
+
 import csv
 
 with open('../data/testcsv.csv', 'r') as f:

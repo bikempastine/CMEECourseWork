@@ -4,7 +4,9 @@
 # Arguments: 0
 # Date: Oct 2022
 
+"""First python script"""
 def foo(x):
+    """First python function"""
     x *= x
     print(x)
 

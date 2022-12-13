@@ -1,3 +1,5 @@
+"""Creates lists with subsets of rainfall data using loops and list comprehensions"""
+
 # Average UK Rainfall (mm) for 1910 by month
 # http://www.metoffice.gov.uk/climate/uk/datasets
 rainfall = (('JAN',111.4),

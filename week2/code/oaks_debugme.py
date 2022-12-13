@@ -43,6 +43,7 @@ def is_an_oak(name):
     return name.lower().startswith('quercus ') #include the space between genus and species to only accept quercus
 
 def main(argv): 
+    """Runs the script"""
     f = open('../data/TestOaksData.csv','r')
     g = open('../data/JustOaksData.csv','w')
     taxa = csv.reader(f)

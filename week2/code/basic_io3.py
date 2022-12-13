@@ -2,6 +2,7 @@
 # STORING OBJECTS
 #############################
 
+"""Demonstrates the use of pickle to open files"""
 my_dictionary = {"a key": 10, "another key": 11}
 
 import pickle

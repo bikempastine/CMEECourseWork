@@ -4,6 +4,7 @@
 # Arguments: 0
 # Date: Oct 2022
 
+"""Examples of for loops"""
 #For loops
 
 for i in range(5):

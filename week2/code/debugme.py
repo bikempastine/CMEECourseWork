@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 #Debugging
+"""Demonstrates how to find bugs and improve error messages"""
 
 def buggyfunc(x):
+    """Return different error messages based on the error encountered"""
     y = x 
     for i in range(x):
         try:
