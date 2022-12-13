@@ -12,7 +12,7 @@ To check the weeks assignement, clone the directory for that week and run the co
 | Week 1 |  UNIX and LINUX, Bash scripting, LaTeX | [here](https://github.com/bikempastine/CMEECourseWork/tree/main/week1) |
 | Week 2 |   Biological Computing in Python    |   [here](https://github.com/bikempastine/CMEECourseWork/tree/main/week2) |
 | Week 3 |   Biological Computing in R   |   [here](https://github.com/bikempastine/CMEECourseWork/tree/main/week3) |
-| Week 2 |   Biological Computing in Python 2    |   [here](https://github.com/bikempastine/CMEECourseWork/tree/main/week2) |
+| Week 7 |   Biological Computing in Python 2    |   [here](https://github.com/bikempastine/CMEECourseWork/tree/main/week7) |
 
 ### Contact
 Bikem Pastine: bp222@ic.ac.uk
