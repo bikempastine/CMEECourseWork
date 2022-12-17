@@ -1,35 +1,43 @@
-#!/usr/bin/env Rscript
+#Author: Dashing Dingos
+#Script: get_TreeHeight.R
+#Created: Dec 2022
+#Desc: Groupwork practical on tree height
 
-# This functiom calculates heights of trees given the distance of each tree
-# from its base and angle to its top, using trigonometric formula
+# clear working directory
+rm(list=ls())
 
-# height = distance * tan(radians)
-
-# Arguments=
-# degrees: the angle of elevation of the tree
-# distance: The distance from the base of the tree (meters)
-
-# Output=
-# The heights of the tree, same units as the distance argument
-
-#import data
-data_name <- commandArgs(trailingOnly = T) #take value from command line
-treesdata <- read.csv(paste("../data/", data_name , sep = "")) #read in the csv, the name of which is printed from csv from the command line
-
-
-#function to get tree heights using trig
+# Function to calculate the height of a tree from its base angl to its top
 TreeHeight <- function(degrees, distance) {
-    radians <- degrees * pi / 180
-    height <- distance * tan(radians)
-
-    return (height)
+  radians <- degrees * pi / 180
+  height <- distance * tan(radians)
+  
+  return (height)
 }
 
-#make a new column on treesdata with the results from the function
-treesdata$Tree.Height.m<- TreeHeight(treesdata$Angle.degrees, treesdata$Distance.m)
+# Import the data from the command line
+# if the command line length is empty, use a default path
+if (length( commandArgs(trailing = T) ) == 0 ){
+  print("No files are inputted, using the default pathway. \n ../data/trees.csv ")
+  fname = "../data/trees.csv"
+} else {
+  fname = commandArgs(trailing = T)[1]
+}
 
-head(treesdata)
-#save the results in results
-rm_csv_data<- substring(data_name, 1, nchar(data_name)-4) #get the string from the input without .csv
-## R
-write.csv(treesdata, paste("../results/",rm_csv_data, "_treeheights.csv", sep=""))
+# read the file as csv
+data <- read.csv(file = fname, header = TRUE)
+
+# make a new column on treesdata with the tree height results
+data$TreeHeight.m <- TreeHeight(data$Angle.degrees, data$Distance.m)
+
+# get the base file name without the file path or extension
+fbase = tools::file_path_sans_ext(basename(fname))
+
+# Write the filepath to save the results
+writepath = paste("../results/", fbase, "_treeheights.csv", sep = "")
+
+# save to results
+print("Saving results into the results folder")
+write.csv(data, writepath)
+
+# Echo message when complete
+print("All done in R!")
