@@ -1,0 +1,626 @@
+Starting code feedback for Bikem, Week7
+
+Current Points = 100
+
+Note that: 
+(1) Major sections begin with a double "====" line 
+(2) Subsections begin with a single "====" line 
+(3) Code output or text file content are printed within single "*****" lines 
+
+======================================================================
+======================================================================
+Your Git repo size this week is about 8.76 MiB on disk 
+
+PART 1: Checking project workflow...
+
+Found the following directories in parent directory: .git, MiniProject, week7, Groupwork, week3, week2, Feedback, week1
+
+Found the following files in parent directory: README.md, .gitignore
+
+Checking for key files in parent directory...
+
+Found .gitignore in parent directory, great! 
+
+Printing contents of .gitignore:
+
+**********************************************************************
+*~
+*.tmp
+
+.csv
+.log
+
+# Python
+*.py[co]
+__pycache__/
+
+#Jupyter
+.ipynb_checkpoints/
+
+# R History files
+.Rhistory
+.Rapp.history
+
+# R Session Data files
+.RData
+
+## Core latex/pdflatex auxiliary files:
+*.aux
+*.lof
+*.log
+*.lot
+*.fls
+*.out
+*.toc
+*.fmt
+*.fot
+*.cb
+*.cb2
+.*.lb
+
+## Intermediate documents:
+*.dvi
+*.xdv
+*-converted-to.*
+# these rules might exclude image files for figures etc.
+# *.ps
+# *.eps
+# *.pdf
+
+## Generated if empty string is given at "Please type another file name for output:"
+.pdf
+
+## Bibliography auxiliary files (bibtex/biblatex/biber):
+*.bbl
+*.bcf
+*.blg
+*-blx.aux
+*-blx.bib
+*.run.xml
+
+## Build tool auxiliary files:
+*.fdb_latexmk
+*.synctex
+*.synctex(busy)
+*.synctex.gz
+*.synctex.gz(busy)
+*.pdfsync
+
+**********************************************************************
+
+Found README in parent directory, named: README.md
+
+Printing contents of README.md:
+
+**********************************************************************
+# My CMEE Coursework Repository
+
+### Description
+This is Bikem Pastine's repository for the Coputational Methods in Ecology and Evolution Master's program. Each week the repository will be updated with the coursework for the prvious week for marking. 
+
+### Instructions
+To check the weeks assignement, clone the directory for that week and run the code within the 'code' folder. The code may prompt for inputs. Appropriate example inputs can be found in the 'data' folder. The outupts of the code can be found in the 'results' folder once the code is run. 
+
+### Contents
+| Submission  |      Learning Objectives      |  Link |
+|----------|:-------------:|------:|
+| Week 1 |  UNIX and LINUX, Bash scripting, LaTeX | [here](https://github.com/bikempastine/CMEECourseWork/tree/main/week1) |
+| Week 2 |   Biological Computing in Python    |   [here](https://github.com/bikempastine/CMEECourseWork/tree/main/week2) |
+| Week 3 |   Biological Computing in R   |   [here](https://github.com/bikempastine/CMEECourseWork/tree/main/week3) |
+| Week 7 |   Biological Computing in Python 2    |   [here](https://github.com/bikempastine/CMEECourseWork/tree/main/week7) |
+| MiniProject |  Computing project comparing linear and nonlinear model preformance   |   [here](https://github.com/bikempastine/CMEECourseWork/tree/main/MiniProject) |
+| Feedback |   Feedback on the submitted work    |   [here](https://github.com/bikempastine/CMEECourseWork/tree/main/Feedback) |
+### Contact
+Bikem Pastine: bp222@ic.ac.uk
+
+Director for the CMEE is course: [mhasoba](https://github.com/mhasoba/TheMulQuaBio)
+
+**********************************************************************
+
+======================================================================
+Looking for the weekly directories...
+
+Found 4 weekly directories: week1, week2, week3, week7
+
+The Week7 directory will be assessed 
+
+======================================================================
+======================================================================
+PART 2: Checking weekly code and workflow...
+
+======================================================================
+Assessing WEEK7...
+
+Found the following directories: code, results, data
+
+Found the following files: README.md
+
+Checking for readme file in weekly directory...
+
+Found README in parent directory, named: README.md
+
+Printing contents of README.md:
+
+**********************************************************************
+# Week 7: Python 2
+
+### Description
+This week focused on learning more advanced pyhton techniques and building on what we learned durring week 1 of python.
+
+### Instructions
+Run the code within the 'code' folder. The code may prompt for inputs. Appropriate example inputs can be found in the 'data' folder. The outupts of the code can be found in the 'results' folder once the code is run. 
+
+### Contents
+| Submission  |      Learning Objectives      |  Link |
+|----------|:-------------:|------:|
+| LV1.py | Evaluates the LV model without carrying capacity | [here](https://github.com/bikempastine/CMEECourseWork/blob/main/week7/code/LV1.py) |
+| LV2.py |   Evaluates the LV model with carrying capacity   |   [here](https://github.com/bikempastine/CMEECourseWork/blob/main/week7/code/LV2.py) |
+| LV1_LV2_comp.py |   Profiles LV1 and LV2  |   [here](https://github.com/bikempastine/CMEECourseWork/blob/main/week7/code/LV1_LV2_comp.py) |
+| fmr.R |   R code that is used to demonstrate using python to build workflows  |   [here](https://github.com/bikempastine/CMEECourseWork/blob/main/week7/code/fmr.R) |
+| run_fmr_R.py |  Runs fmr.R   |   [here](https://github.com/bikempastine/CMEECourseWork/blob/main/week7/code/run_fmr_R.py) |
+
+### Contact
+Bikem Pastine: bp222@ic.ac.uk
+
+Director for the CMEE is course: [mhasoba](https://github.com/mhasoba/TheMulQuaBio)
+**********************************************************************
+
+Results directory is empty - good! 
+
+Found 5 code files: LV1_LV2_comp.py, LV1.py, LV2.py, fmr.R, run_fmr_R.py
+
+======================================================================
+Testing script/code files...
+
+======================================================================
+Inspecting script file LV1_LV2_comp.py...
+
+File contents are:
+
+**********************************************************************
+"""Profiles LV1 and LV2"""
+
+#comparing the t
+from  cProfile import Profile #profiling
+import pstats #unpacking
+from io import StringIO #a C thing
+import LV1
+import LV2
+
+pr = Profile() #load in this profile class thing
+
+##LV1
+pr.enable() #turn on profiling
+LV1.main([], plot=True) #turn off plotting and do the LV1
+pr.disable() #turn it off
+
+s = StringIO() #this C thing from before
+ps = pstats.Stats(pr, stream=s) #put the results into the s string
+ps.print_stats(0).sort_stats('calls') #???
+
+print("LV1:")
+print(f"{s.getvalue()}\n") #print the value from before 
+
+##LV2
+pr.enable() #turn on profiling
+LV2.main([], plot = True) #turn off plotting and do the LV1
+pr.disable() #turn it off
+
+s2 = StringIO() #this C thing from before
+ps2 = pstats.Stats(pr, stream=s2) #put the results into the s string
+ps2.print_stats(0).sort_stats('calls') #???
+
+print("LV2:")
+print(f"{s2.getvalue()}\n") #print the value from before 
+**********************************************************************
+
+Testing LV1_LV2_comp.py...
+
+LV1_LV2_comp.py is a Python script file;
+
+checking for docstrings...
+
+Found no functions, but one docstring for the script, good
+
+Current Points = 100
+
+Output (only first 500 characters): 
+
+
+**********************************************************************
+Incorrect number of arguments provided (0/4)
+Using default values!
+1 0.1 1.5 0.75
+LV1:
+         470727 function calls (463951 primitive calls) in 0.725 seconds
+
+
+
+Incorrect number of arguments provided (0/5)
+Using default values instead!
+0.5 0.1 1.5 0.75 300
+final consumer population is 4.685995228139225
+final resource population is 20.071233391471452
+LV2:
+         718961 function calls (707702 primitive calls) in 0.999 seconds
+
+
+
+
+**********************************************************************
+
+Encountered error (or warning):
+
+***IGNORE IF THIS ERROR IS EXPECTED AS PART OF AN IN-CLASS EXERCISE***
+
+No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.
+
+======================================================================
+Inspecting script file LV1.py...
+
+File contents are:
+
+**********************************************************************
+"""Evaluating the LV model by numerical integration WITHOUT carrying capacity"""
+
+# import some packages
+import numpy as np
+import scipy as sc
+from scipy import stats
+import scipy.integrate as integrate
+import matplotlib.pylab as p
+
+#Define your function
+def dCR_dt(pops, t=0, r=0, a=0, z=0, e=0): #added in the variables to be defined in this function and defined as zero as a debegugging measure
+    """The Lotka-Volterra model"""
+    #docstrings
+    R = pops[0]
+    C = pops[1]
+    dRdt = r * R - a * R * C
+    dCdt = -z * C + e * a * R * C
+    return np.array([dRdt, dCdt])
+
+
+
+def main(argv, plot=True): #able to turn plot on and off
+    """Run dCR_dt and plot the results when the function is being run by itself"""
+    # Assign parameter values
+    r = 1
+    a = 0.1
+    z = 1.5
+    e = 0.75
+
+    try: #test for arguments provided 
+        r,a,z,e = [float(x) for x in argv[1:]]
+    except ValueError: #if a value error occurs then print these things and use defaults
+        print(f"Incorrect number of arguments provided ({len(argv[1:])}/4)")
+        print("Using default values!")
+    print(r,a,z,e)
+
+    # defining time vector
+    t = np.linspace(0,15,1000)
+
+    # set initial conditons 
+    R0 = 10
+    C0 = 5
+    RC0 = np.array([R0, C0])
+
+    # integrate the system forward from the starting conditions
+    pops, infodict = integrate.odeint(dCR_dt, RC0, t, args=(r,a,z,e), full_output = True) #put in arguments for the function here withing the integrate functions 
+
+    if plot:
+        # plot your results
+
+        f1 = p.figure()
+
+        p.plot(t, pops[:,0], 'g-', label = 'Resource density')
+        p.plot(t, pops[:,1], 'b-', label='Consumer density')
+        p.grid()
+        p.legend(loc='best')
+        p.xlabel('Time')
+        p.ylabel('Population density')
+        p.title('Consumer-Resource population dynamics')
+        p.show(block=False)
+
+
+        # save your result
+        f1.savefig('../results/LV_model.pdf')
+
+        # Practical
+        f2 = p.figure()
+        p.plot(pops[:,0], pops[:,1], 'r-')
+        p.grid()
+        p.legend(loc='best')
+        p.xlabel('Resource density')
+        p.ylabel('Consumer density')
+        p.title('Consumer-Resource population dynamics')
+        p.show(block=False)
+
+        # save your result
+        f2.savefig('../results/LV_dynamics.pdf')
+
+
+#name and main to make it not run automatically when inported
+if __name__ == "__main__":
+    import sys
+    main(sys.argv)
+**********************************************************************
+
+Testing LV1.py...
+
+LV1.py is a Python script file;
+
+checking for docstrings...
+
+Found one or more docstrings and functions
+
+Current Points = 100
+
+Output (only first 500 characters): 
+
+
+**********************************************************************
+Incorrect number of arguments provided (0/4)
+Using default values!
+1 0.1 1.5 0.75
+
+**********************************************************************
+
+Encountered error (or warning):
+
+***IGNORE IF THIS ERROR IS EXPECTED AS PART OF AN IN-CLASS EXERCISE***
+
+No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.
+
+======================================================================
+Inspecting script file LV2.py...
+
+File contents are:
+
+**********************************************************************
+"""Evaluating the LV model by numerical integration and including the environmental carrying capacity"""
+
+# import some packages
+import numpy as np
+import scipy as sc
+from scipy import stats
+import scipy.integrate as integrate
+import matplotlib.pylab as p
+
+
+
+#Define your function
+def dCR_dt(pops, t=0, r=0, a=0, z=0, e=0, K=0):
+    """The Lotka-Volterra model with carrying capacity"""
+    #docstrings
+    R = pops[0]
+    C = pops[1]
+    dRdt = (r * R)*(1 - R/K) - a * R * C
+    dCdt = -z * C + e * a * R * C
+    return np.array([dRdt, dCdt])
+
+
+def main(argv, plot= True):
+    p.close('all')
+
+    """Run the main function"""
+
+    #Assign parameter values
+    # Default parameters to be replaced when provided in the command line
+    r = 0.5
+    a = 0.1
+    z = 1.5
+    e = 0.75
+    K = 300
+
+    #from command line
+    try:
+        r,a,z,e,K = [float(x) for x in argv[1:]]
+    except ValueError:
+        print(f"Incorrect number of arguments provided ({len(argv[1:])}/5)")
+        print("Using default values instead!")
+    print(r,a,z,e,K)
+
+    # defining time vector
+    t = np.linspace(0,300,1000)
+
+    # set initial conditons 
+    R0 = 10
+    C0 = 5
+    RC0 = np.array([R0, C0])
+
+    
+    # integrate the system  forward from the starting conditions
+    
+    pops, infodict = integrate.odeint(dCR_dt, RC0, t, args=(r,a,z,e,K), full_output = True) #put in arguments for the function here withing the integrate functions 
+ 
+    print(f"final consumer population is {pops[-1][1]}")
+    print(f"final resource population is {pops[-1][0]}")
+
+    if plot:
+        # plot your results
+
+        f1 = p.figure()
+
+        p.plot(t, pops[:,0], 'g-', label = 'Resource density')
+        p.plot(t, pops[:,1], 'b-', label='Consumer density')
+        p.grid()
+        p.legend(loc='best')
+        p.xlabel('Time')
+        p.ylabel('Population density')
+        p.title('Consumer-Resource population dynamics')
+        p.text(250,6, f"r = {r}\na = {a}\nz = {z}\ne = {e}\nK = {K} ")
+        p.show(block=False)
+
+        
+        # save your result
+        f1.savefig('../results/LV2_model.pdf')
+
+        # Practical
+        f2 = p.figure()
+        p.plot(pops[:,0], pops[:,1], 'r-')
+        p.grid()
+        p.xlabel('Resource density')
+        p.ylabel('Consumer density')
+        p.title('Consumer-Resource population dynamics')
+        p.text(9,6, f"r = {r}\na = {a}\nz = {z}\ne = {e}\nK = {K} ")
+        p.show(block=False)
+
+
+        # save your result
+        f2.savefig('../results/LV2_dynamics.pdf')
+
+
+
+#name = main to block automatic running on inport
+if __name__ == "__main__":
+    import sys
+    main(sys.argv)
+**********************************************************************
+
+Testing LV2.py...
+
+LV2.py is a Python script file;
+
+checking for docstrings...
+
+Found one or more docstrings and functions
+
+Current Points = 100
+
+Output (only first 500 characters): 
+
+
+**********************************************************************
+Incorrect number of arguments provided (0/5)
+Using default values instead!
+0.5 0.1 1.5 0.75 300
+final consumer population is 4.685995228139225
+final resource population is 20.071233391471452
+
+**********************************************************************
+
+Code ran without errors
+
+Time consumed = 1.36311s
+
+======================================================================
+Inspecting script file fmr.R...
+
+File contents are:
+
+**********************************************************************
+# Plots log(field metabolic rate) against log(body mass) for the Nagy et al 
+# 1999 dataset to a file fmr.pdf.
+
+cat("Reading CSV\n")
+
+nagy <- read.csv('../data/NagyEtAl1999.csv', stringsAsFactors = FALSE)
+
+cat("Creating graph\n")
+pdf('../results/fmr_plot.pdf', 11, 8.5)
+col <- c(Aves='purple3', Mammalia='red3', Reptilia='green3')
+plot(log10(nagy$M.g), log10(nagy$FMR.kJ.day.1), pch=19, col=col[nagy$Class], 
+     xlab=~log[10](M), ylab=~log[10](FMR))
+for(class in unique(nagy$Class)){
+    model <- lm(log10(FMR.kJ.day.1) ~ log10(M.g), data=nagy[nagy$Class==class,])
+    abline(model, col=col[class])
+}
+dev.off()
+
+cat("Finished in R!\n")
+
+**********************************************************************
+
+Testing fmr.R...
+
+Output (only first 500 characters): 
+
+
+**********************************************************************
+Reading CSV
+Creating graph
+null device 
+          1 
+Finished in R!
+
+**********************************************************************
+
+Code ran without errors
+
+Time consumed = 0.23955s
+
+======================================================================
+Inspecting script file run_fmr_R.py...
+
+File contents are:
+
+**********************************************************************
+"""Runs fmr.R in python, expresses if the run was sucsessful, and prints the outputs on to the R console in the python console"""
+
+import subprocess
+p = subprocess.Popen("Rscript --verbose fmr.R > ../results/fmr_console.Rout 2> ../results/fmr_errFile.Rout", shell=True).wait()
+
+# print if run is sucsessful
+if p == 0:
+    print("R code fmr.R sucsessfully run in python!\n")
+
+print("Contents of the R console output: \n")
+
+# open ouptput file and read lines and print to the console
+a_file = open("../results/fmr_console.Rout")
+lines = a_file. readlines()
+for line in lines:
+    print(line)
+a_file. close()
+**********************************************************************
+
+Testing run_fmr_R.py...
+
+run_fmr_R.py is a Python script file;
+
+checking for docstrings...
+
+Found no functions, but one docstring for the script, good
+
+Current Points = 100
+
+Output (only first 500 characters): 
+
+
+**********************************************************************
+R code fmr.R sucsessfully run in python!
+
+Contents of the R console output: 
+
+Reading CSV
+
+Creating graph
+
+null device 
+
+          1 
+
+Finished in R!
+
+
+**********************************************************************
+
+Code ran without errors
+
+Time consumed = 0.26622s
+
+======================================================================
+======================================================================
+Finished running scripts
+
+Ran into 2 errors
+
+======================================================================
+======================================================================
+
+FINISHED WEEKLY ASSESSMENT
+
+Current Points for the Week = 100
+
+NOTE THAT THESE ARE POINTS, NOT MARKS FOR THE WEEK!
